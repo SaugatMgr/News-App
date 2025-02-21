@@ -19,15 +19,11 @@ To get started with the project, follow these steps:
     ```bash
     cd News-App
     ```
-3. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4. **Create a virtual environment:**
+3. **Create a virtual environment:**
     ```bash
     python -m venv .venv
     ```
-5. **Activate the virtual environment:**
+4. **Activate the virtual environment:**
 
     On Windows:
 
@@ -39,6 +35,10 @@ To get started with the project, follow these steps:
 
     ```bash
     source .venv/bin/activate
+    ```
+5. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
     ```
 
 A `.env.local` file needs to be created in the main project folder with the following contents:
