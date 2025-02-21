@@ -5,13 +5,19 @@ from newsapi import NewsApiClient
 from django.shortcuts import render
 from django.conf import settings
 
-from utils.constants import available_country_codes
+from utils.constants import available_countries, all_countries
+
+
+def get_full_country_name(country_code):
+    return all_countries.get(country_code)
 
 
 def get_top_headlines(country, category, newsapi):
     try:
-        if country not in available_country_codes:
-            return {"error": "No news found for your country."}
+        if available_countries.get(country) is None:
+            return {
+                "error": f"No news found for your country {get_full_country_name(country)}."
+            }
         top_headlines = newsapi.get_top_headlines(
             category=category,
             language="en",
@@ -21,7 +27,9 @@ def get_top_headlines(country, category, newsapi):
         if status == "error":
             return {"error": top_headlines["message"]}
         if status == "ok" and top_headlines["totalResults"] == 0:
-            return {"error": f"No news found for {category} in {country}."}
+            return {
+                "error": f"No news found for {category} in {get_full_country_name(country)}."
+            }
 
         articles = top_headlines["articles"]
         context = []
@@ -33,13 +41,18 @@ def get_top_headlines(country, category, newsapi):
                     "description": article["description"],
                     "url": article["url"],
                     "image": article["urlToImage"],
-                    "published_at": article["publishedAt"],
+                    "published_at": article["publishedAt"].split("T")[0],
                 }
             )
-        return {"news_data": context}
+        return {
+            "news_data": context,
+            "message": f"Top headlines for {category} in {get_full_country_name(country)}.",
+        }
     except Exception as e:
         if str(e) == "invalid country":
-            return {"error": "No news found for your country."}
+            return {
+                "error": f"No news found for your country {get_full_country_name(country)}."
+            }
         return {"error": f"An error occurred: {e}"}
 
 
