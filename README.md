@@ -1,7 +1,7 @@
 # News-App Project
 
 ## Description
-This project is an News App developed using Django and Bootstrap for UI design.
+This project is a News App developed using Django and Bootstrap for UI design.
 
 ## Features
 - News according to the user location.
@@ -22,6 +22,23 @@ To get started with the project, follow these steps:
 3. Install dependencies:
     ```bash
     pip install -r requirements.txt
+    ```
+4. **Create a virtual environment:**
+    ```bash
+    python -m venv .venv
+    ```
+5. **Activate the virtual environment:**
+
+    On Windows:
+
+    ```bash
+    .\.venv\Scripts\activate
+    ```
+
+    On Unix or MacOS:
+
+    ```bash
+    source .venv/bin/activate
     ```
 
 A `.env.local` file needs to be created in the main project folder with the following contents:
