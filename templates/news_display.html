@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <h2 class="mb-3 text-center">Find News</h2>
+    
+    <form action="{% url 'news_by_country_and_category' %}" method="GET" class="row g-3">
+        <div class="col-md-6">
+            <label for="country" class="form-label fw-bold">Select a Country:</label>
+            <select name="country" id="country" class="form-select">
+                <option value="ae">United Arab Emirates (AE)</option>
+                <option value="ar">Argentina (AR)</option>
+                <option value="at">Austria (AT)</option>
+                <option value="au">Australia (AU)</option>
+                <option value="be">Belgium (BE)</option>
+                <option value="bg">Bulgaria (BG)</option>
+                <option value="br">Brazil (BR)</option>
+                <option value="ca">Canada (CA)</option>
+                <option value="ch">Switzerland (CH)</option>
+                <option value="cn">China (CN)</option>
+                <option value="co">Colombia (CO)</option>
+                <option value="cu">Cuba (CU)</option>
+                <option value="cz">Czech Republic (CZ)</option>
+                <option value="de">Germany (DE)</option>
+                <option value="eg">Egypt (EG)</option>
+                <option value="fr">France (FR)</option>
+                <option value="gb">United Kingdom (GB)</option>
+                <option value="gr">Greece (GR)</option>
+                <option value="hk">Hong Kong (HK)</option>
+                <option value="hu">Hungary (HU)</option>
+                <option value="id">Indonesia (ID)</option>
+                <option value="ie">Ireland (IE)</option>
+                <option value="il">Israel (IL)</option>
+                <option value="in">India (IN)</option>
+                <option value="it">Italy (IT)</option>
+                <option value="jp">Japan (JP)</option>
+                <option value="kr">South Korea (KR)</option>
+                <option value="lt">Lithuania (LT)</option>
+                <option value="lv">Latvia (LV)</option>
+                <option value="ma">Morocco (MA)</option>
+                <option value="mx">Mexico (MX)</option>
+                <option value="my">Malaysia (MY)</option>
+                <option value="ng">Nigeria (NG)</option>
+                <option value="nl">Netherlands (NL)</option>
+                <option value="no">Norway (NO)</option>
+                <option value="nz">New Zealand (NZ)</option>
+                <option value="ph">Philippines (PH)</option>
+                <option value="pl">Poland (PL)</option>
+                <option value="pt">Portugal (PT)</option>
+                <option value="ro">Romania (RO)</option>
+                <option value="rs">Serbia (RS)</option>
+                <option value="ru">Russia (RU)</option>
+                <option value="sa">Saudi Arabia (SA)</option>
+                <option value="se">Sweden (SE)</option>
+                <option value="sg">Singapore (SG)</option>
+                <option value="si">Slovenia (SI)</option>
+                <option value="sk">Slovakia (SK)</option>
+                <option value="th">Thailand (TH)</option>
+                <option value="tr">Turkey (TR)</option>
+                <option value="tw">Taiwan (TW)</option>
+                <option value="ua">Ukraine (UA)</option>
+                <option value="us">United States (US)</option>
+                <option value="ve">Venezuela (VE)</option>
+                <option value="za">South Africa (ZA)</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="category" class="form-label fw-bold">Select a News Category:</label>
+            <select name="category" id="category" class="form-select">
+                <option value="business">Business</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="general">General</option>
+                <option value="health">Health</option>
+                <option value="science">Science</option>
+                <option value="sports">Sports</option>
+                <option value="technology">Technology</option>
+            </select>
+        </div>
+
+        <div class="col-12 text-center">
+            <button class="btn btn-primary px-4">Search</button>
+        </div>
+    </form>
+</div>
+
+{% if error %}
+    <div class="alert alert-danger mt-3">{{ error }}</div>
+{% endif %}
+
+{% if message %}
+    <div class="alert alert-info mt-3">{{ message }}</div>
+{% endif %}
+
+{% if news_data %}
+    <div class="row mt-4">
+        {% for data in news_data %}
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <img src="{{ data.image }}" class="card-img-top" alt="{{ data.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ data.title }}</h5>
+                        <p class="card-text"><strong>By:</strong> {{ data.author }}</p>
+                        <p class="text-muted">{{ data.published_at }}</p>
+                        <p class="card-text">{{ data.description|truncatewords:20 }}</p>
+                        <a href="{{ data.url }}" class="btn btn-sm btn-outline-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock content %}
