@@ -63,7 +63,7 @@ def index(request):
     newsapi = NewsApiClient(api_key=settings.NEWS_API_KEY)
     context = get_top_headlines(country_code, "general", newsapi)
 
-    return render(request, "user_location_news.html", context)
+    return render(request, "news_display.html", context)
 
 
 def news_by_country_and_category(request):
@@ -74,4 +74,4 @@ def news_by_country_and_category(request):
     newsapi = NewsApiClient(api_key=settings.NEWS_API_KEY)
     context = get_top_headlines(country, category, newsapi)
 
-    return render(request, "news_results.html", context)
+    return render(request, "news_display.html", context)
