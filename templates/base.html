@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>News App</title>
+        <meta name="description" content="Stay updated with the latest news">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    </head>
+    <body>
+        <!-- Navbar -->
+        {% include "header/header.html" %}
+        <!-- Navbar End -->
+
+        <!-- Main Content -->
+        <main class="container my-4">
+            {% block content %}{% endblock %}
+        </main>
+        <!-- Main Content End -->
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <p class="mb-0">&copy; 2025 News App | Stay Updated</p>
+        </footer>
+        <!-- Footer End -->
+
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}" defer></script>
+    </body>
+</html>
