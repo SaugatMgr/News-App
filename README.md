@@ -48,6 +48,7 @@ DEBUG=True
 ALLOWED_HOSTS=*
 DATABASE_URL=postgres://db_user:db_password@localhost:db_port_number/db_name
 NEWS_API_KEY=your_news_api_key
+CORS_ALLOW_ALL_ORIGINS=True # for mobile app requests
 ```
 
 Then follow the following steps:
@@ -56,13 +57,18 @@ Then follow the following steps:
         ```bash
         python manage.py createsuperuser
         ```
-2. **Run the server:**
+2. **Migrate Changes:**
+    ```bash
+    python manage.py migrate
+    ```
+3. **Run the server:**
     ```bash
     python manage.py runserver
     ```
     
 ## Usage
 Note: At first, you need to register and create API key for the News API used in this project. Go to [https://newsapi.org] and register account then click on Get API key. After you get API key, paste it to the env file in the project.
+Also, if other countries News do not show up then try US which works for Free tier.
 
 ## Technologies Used
 - Django for the web framework
