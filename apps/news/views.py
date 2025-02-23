@@ -5,11 +5,8 @@ from newsapi import NewsApiClient
 from django.shortcuts import render
 from django.conf import settings
 
-from utils.constants import available_countries, all_countries
-
-
-def get_full_country_name(country_code):
-    return all_countries.get(country_code)
+from utils.constants import available_countries
+from utils.helpers import get_full_country_name
 
 
 def get_top_headlines(country, category, newsapi):
